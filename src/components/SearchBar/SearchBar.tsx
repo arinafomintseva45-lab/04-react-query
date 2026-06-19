@@ -14,11 +14,13 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
     if (!query.trim()) return;
 
     onSearch(query);
+    setQuery("");
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <input
+        type="text"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />

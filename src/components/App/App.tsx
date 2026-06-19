@@ -7,7 +7,7 @@ import Pagination from "../Pagination/Pagination";
 import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 
-import { searchMovies } from "../../services/tmdb";
+import { searchMovies } from "../../services/movieService";
 import type { MoviesResponse } from "../../types/movie";
 
 import css from "./App.module.css";
