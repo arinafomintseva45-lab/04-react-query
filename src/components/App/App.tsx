@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -34,9 +34,11 @@ export default function App() {
     setPage(1);
   };
 
-  if (isSuccess && data?.results.length === 0) {
-    toast.error("No movies found");
-  }
+  useEffect(() => {
+    if (isSuccess && data?.results.length === 0) {
+      toast.error("No movies found");
+    }
+  }, [isSuccess, data?.results.length]);
 
   return (
     <div className={css.container}>

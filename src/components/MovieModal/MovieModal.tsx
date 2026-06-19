@@ -27,17 +27,22 @@ export default function MovieModal({ movie, onClose }: MovieModalProps) {
   };
 
   return createPortal(
-    <div onClick={handleBackdrop}>
-      <div>
+    <div className="backdrop" onClick={handleBackdrop}>
+      <div className="modal">
+        <button className="closeBtn" onClick={onClose}>
+          ✕
+        </button>
+
         <h2>{movie.title}</h2>
-        <p>{movie.overview}</p>
-        <p>{movie.release_date}</p>
-        <p>{movie.vote_average}</p>
 
         <img
           src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`}
           alt={movie.title}
         />
+
+        <p>{movie.overview}</p>
+        <p>Release: {movie.release_date}</p>
+        <p>Rating: {movie.vote_average}</p>
       </div>
     </div>,
     document.body
