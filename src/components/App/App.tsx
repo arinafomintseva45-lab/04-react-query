@@ -5,7 +5,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import MovieList from "../MovieList/MovieList";
 import Pagination from "../Pagination/Pagination";
 
-import { searchMovies } from "../../api/tmdb";
+import { searchMovies } from "../../services/tmdb";
 
 export default function App() {
   const [query, setQuery] = useState("");
