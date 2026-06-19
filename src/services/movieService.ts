@@ -1,18 +1,26 @@
 import axios from "axios";
+import type { Movie } from "../types/movie";
 
-const API_KEY = "993425227ddde7f187522407a3922218";
+export interface MoviesResponse {
+  page: number;
+  results: Movie[];
+  total_pages: number;
+  total_results: number;
+}
 
 const api = axios.create({
   baseURL: "https://api.themoviedb.org/3",
+  headers: {
+    Authorization: `Bearer ${import.meta.env.VITE_TMDB_TOKEN}`,
+  },
 });
 
-export const searchMovies = async (query: string, page: number) => {
-  const { data } = await api.get("/search/movie", {
-    params: {
-      api_key: API_KEY,
-      query,
-      page,
-    },
+export const searchMovies = async (
+  query: string,
+  page: number
+): Promise<MoviesResponse> => {
+  const { data } = await api.get<MoviesResponse>("/search/movie", {
+    params: { query, page },
   });
 
   return data;

@@ -1,29 +1,29 @@
-import { useState } from "react";
 import type { FormEvent } from "react";
+import toast from "react-hot-toast";
 
 interface SearchBarProps {
-  onSearch: (query: string) => void;
+  onSubmit: (query: string) => void;
 }
 
-export default function SearchBar({ onSearch }: SearchBarProps) {
-  const [query, setQuery] = useState("");
-
+export default function SearchBar({ onSubmit }: SearchBarProps) {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!query.trim()) return;
+    const formData = new FormData(e.currentTarget);
+    const query = formData.get("query") as string;
 
-    onSearch(query);
-    setQuery("");
+    if (!query.trim()) {
+      toast.error("Search cannot be empty");
+      return;
+    }
+
+    onSubmit(query);
+    e.currentTarget.reset();
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
+      <input name="query" type="text" placeholder="Search movies..." />
       <button type="submit">Search</button>
     </form>
   );
